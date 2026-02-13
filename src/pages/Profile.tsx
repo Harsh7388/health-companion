@@ -34,8 +34,8 @@ const Profile: React.FC = () => {
     });
   };
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await logout();
     navigate('/');
     toast({
       title: 'Logged out',

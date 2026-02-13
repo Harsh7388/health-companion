@@ -21,7 +21,7 @@ interface MedicineCardProps {
   showActions?: boolean;
 }
 
-const frequencyLabels = {
+const frequencyLabels: Record<string, string> = {
   daily: 'Once daily',
   twice_daily: 'Twice daily',
   weekly: 'Weekly',
