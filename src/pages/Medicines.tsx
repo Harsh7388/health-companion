@@ -28,7 +28,7 @@ const Medicines: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     dosage: '',
-    frequency: 'daily' as Medicine['frequency'],
+    frequency: 'daily',
     time: '08:00',
   });
 
@@ -61,7 +61,7 @@ const Medicines: React.FC = () => {
     setFormData({
       name: medicine.name,
       dosage: medicine.dosage,
-      frequency: medicine.frequency,
+      frequency: medicine.frequency as string,
       time: medicine.time,
     });
     setIsOpen(true);
@@ -148,7 +148,7 @@ const Medicines: React.FC = () => {
                       <Label htmlFor="frequency">Frequency</Label>
                       <Select 
                         value={formData.frequency}
-                        onValueChange={(value) => setFormData(prev => ({ ...prev, frequency: value as Medicine['frequency'] }))}
+                        onValueChange={(value) => setFormData(prev => ({ ...prev, frequency: value }))}
                       >
                         <SelectTrigger>
                           <SelectValue />
