@@ -10,6 +10,7 @@ export interface AdminUser {
   role: string;
   medicine_count: number;
   adherence: number;
+  is_blocked: boolean;
 }
 
 export function useAdminUsers() {
@@ -19,7 +20,7 @@ export function useAdminUsers() {
       // Get all profiles
       const { data: profiles, error: profilesError } = await supabase
         .from('profiles')
-        .select('user_id, name, age, created_at');
+        .select('user_id, name, age, created_at, is_blocked');
       if (profilesError) throw profilesError;
 
       // Get roles
@@ -54,6 +55,7 @@ export function useAdminUsers() {
           role,
           medicine_count: userMeds.length,
           adherence,
+          is_blocked: (p as any).is_blocked ?? false,
         };
       });
 
