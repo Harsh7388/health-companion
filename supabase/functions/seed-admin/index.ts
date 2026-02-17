@@ -18,7 +18,7 @@ Deno.serve(async (req) => {
     });
 
     const testUsers = [
-      { email: "admin@meditrack.com", password: "Admin123!", name: "Admin User", age: 30, isAdmin: true },
+      { email: "harshvardhan20@gmail.com", password: "Harsh@394", name: "Admin User", age: 30, isAdmin: true },
       { email: "john@example.com", password: "Test1234!", name: "John Doe", age: 28 },
       { email: "jane@example.com", password: "Test1234!", name: "Jane Smith", age: 35 },
       { email: "mike@example.com", password: "Test1234!", name: "Mike Johnson", age: 42 },
@@ -117,7 +117,7 @@ Deno.serve(async (req) => {
     return new Response(
       JSON.stringify({
         success: true,
-        message: "Seed complete. Admin: admin@meditrack.com / Admin123!",
+        message: "Seed complete. Admin: harshvardhan20@gmail.com / Harsh@394",
         usersCreated: createdUsers.length,
       }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
