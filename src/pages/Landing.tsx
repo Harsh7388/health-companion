@@ -345,11 +345,11 @@ const Landing: React.FC = () => {
               ))}
             </div>
             <blockquote className="text-xl md:text-2xl font-display font-semibold text-foreground leading-relaxed">
-              "MediTrack has completely changed how I manage my medications. The reminders are spot on and the streak system keeps me motivated every day."
+              "Healtrack has completely changed how I manage my medications. The reminders are spot on and the streak system keeps me motivated every day."
             </blockquote>
             <div className="mt-6 flex items-center justify-center gap-3">
               <div className="w-10 h-10 rounded-full bg-primary/15 flex items-center justify-center">
-                <span className="text-sm font-bold text-primary">S</span>
+                <span className="text-sm font-bold text-primary">H</span>
               </div>
               <div className="text-left">
                 <p className="text-sm font-semibold text-foreground">Harsh Vardhan Maurya</p>
