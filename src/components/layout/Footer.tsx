@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
               <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
                 <Pill className="w-6 h-6 text-primary-foreground" />
               </div>
-              <span className="font-display font-bold text-xl">MediTrack</span>
+              <span className="font-display font-bold text-xl">HealTrack</span>
             </Link>
             <p className="text-muted-foreground text-sm max-w-sm">
               Your personal medicine reminder and health tracking companion. Never miss a dose again.
@@ -35,14 +35,13 @@ const Footer: React.FC = () => {
             <ul className="space-y-2">
               <li><Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">About</Link></li>
               <li><Link to="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">Privacy</Link></li>
-              <li><Link to="/admin/login" className="text-sm text-muted-foreground hover:text-primary transition-colors">Admin</Link></li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-border mt-8 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} MediTrack. All rights reserved.
+            © {new Date().getFullYear()} HealTrack. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground flex items-center gap-1">
             Made with <Heart className="w-4 h-4 text-destructive fill-destructive" /> for your health
