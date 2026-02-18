@@ -41,14 +41,12 @@ interface AuthProviderProps {
 }
 
 async function buildAppUser(supabaseUser: SupabaseUser): Promise<AppUser> {
-  // Fetch profile
   const { data: profile } = await supabase
     .from('profiles')
     .select('name, age, avatar_url')
     .eq('user_id', supabaseUser.id)
     .maybeSingle();
 
-  // Check admin role
   const { data: roles } = await supabase
     .from('user_roles')
     .select('role')
@@ -72,36 +70,51 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Listen for auth changes FIRST
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      setSession(session);
-      if (session?.user) {
-        // Use setTimeout to avoid potential deadlock with Supabase client
+    let isMounted = true;
+
+    // Listen for ONGOING auth changes — does NOT control isLoading
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, newSession) => {
+      if (!isMounted) return;
+      setSession(newSession);
+
+      if (newSession?.user) {
+        // Defer to avoid deadlock with Supabase client
         setTimeout(async () => {
-          const appUser = await buildAppUser(session.user);
-          setUser(appUser);
-          setIsLoading(false);
+          if (!isMounted) return;
+          const appUser = await buildAppUser(newSession.user);
+          if (isMounted) setUser(appUser);
         }, 0);
       } else {
         setUser(null);
-        setIsLoading(false);
       }
     });
 
-    // Then check existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      if (session?.user) {
-        buildAppUser(session.user).then(appUser => {
-          setUser(appUser);
-          setIsLoading(false);
-        });
-      } else {
-        setIsLoading(false);
-      }
-    });
+    // INITIAL load — controls isLoading
+    const initializeAuth = async () => {
+      try {
+        const { data: { session: initialSession } } = await supabase.auth.getSession();
+        if (!isMounted) return;
 
-    return () => subscription.unsubscribe();
+        setSession(initialSession);
+
+        if (initialSession?.user) {
+          // Await role check BEFORE setting loading false
+          const appUser = await buildAppUser(initialSession.user);
+          if (isMounted) setUser(appUser);
+        }
+      } catch (error) {
+        console.error('Error initializing auth:', error);
+      } finally {
+        if (isMounted) setIsLoading(false);
+      }
+    };
+
+    initializeAuth();
+
+    return () => {
+      isMounted = false;
+      subscription.unsubscribe();
+    };
   }, []);
 
   const login = async (email: string, password: string) => {
