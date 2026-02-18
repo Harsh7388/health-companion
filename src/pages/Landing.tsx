@@ -72,10 +72,10 @@ const features = [
 ];
 
 const stats = [
-  { value: '10K+', label: 'Active Users', icon: Heart },
-  { value: '98%', label: 'Adherence Rate', icon: BarChart3 },
-  { value: '50K+', label: 'Doses Tracked', icon: Pill },
-  { value: '4.9', label: 'User Rating', icon: Star },
+  { value: '100+', label: 'Active Users', icon: Heart },
+  { value: '98%', label: 'Attendence Rate', icon: BarChart3 },
+  { value: '1k+', label: 'Doses Tracked', icon: Pill },
+  { value: '4.5', label: 'User Rating', icon: Star },
 ];
 
 const container = {
@@ -191,7 +191,7 @@ const Landing: React.FC = () => {
                         <Pill className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-foreground">Vitamin D3</h4>
+                        <h4 className="font-bold text-foreground">Vitamin D</h4>
                         <p className="text-sm text-muted-foreground">1000 IU • 8:00 AM</p>
                       </div>
                     </div>
@@ -352,8 +352,8 @@ const Landing: React.FC = () => {
                 <span className="text-sm font-bold text-primary">S</span>
               </div>
               <div className="text-left">
-                <p className="text-sm font-semibold text-foreground">Sarah Johnson</p>
-                <p className="text-xs text-muted-foreground">Daily user for 6 months</p>
+                <p className="text-sm font-semibold text-foreground">Harsh Vardhan Maurya</p>
+                <p className="text-xs text-muted-foreground">Daily user for 1 months</p>
               </div>
             </div>
           </motion.div>
@@ -385,7 +385,7 @@ const Landing: React.FC = () => {
                 Start Your Health Journey Today
               </h2>
               <p className="text-lg text-primary-foreground/80 mb-10 max-w-xl mx-auto leading-relaxed">
-                Join thousands of users who have improved their medication adherence with MediTrack.
+                Join thousands of users who have improved their medication attendance with HealTrack.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button 
