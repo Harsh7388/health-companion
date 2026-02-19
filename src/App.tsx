@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { MedicineProvider } from "@/contexts/MedicineContext";
+import AIChatbot from "@/components/AIChatbot";
 
 // Pages
 import Landing from "./pages/Landing";
@@ -48,6 +49,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
+          <AIChatbot />
         </TooltipProvider>
       </MedicineProvider>
     </AuthProvider>
