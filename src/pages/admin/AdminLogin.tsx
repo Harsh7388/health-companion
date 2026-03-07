@@ -24,6 +24,25 @@ const AdminLogin: React.FC = () => {
     try {
       const result = await login(email, password);
       if (result.success) {
+        // Verify the user actually has admin role before granting access
+        const { data: { user: authUser } } = await (await import('@/integrations/supabase/client')).supabase.auth.getUser();
+        if (!authUser) {
+          toast({ variant: 'destructive', title: 'Access Denied', description: 'Authentication failed.' });
+          return;
+        }
+        const { data: roles } = await (await import('@/integrations/supabase/client')).supabase
+          .from('user_roles')
+          .select('role')
+          .eq('user_id', authUser.id)
+          .eq('role', 'admin');
+        
+        if (!roles || roles.length === 0) {
+          // Not an admin — sign them out immediately
+          await (await import('@/integrations/supabase/client')).supabase.auth.signOut();
+          toast({ variant: 'destructive', title: 'Access Denied', description: 'You do not have admin privileges.' });
+          return;
+        }
+        
         toast({ title: 'Welcome, Admin!', description: 'You have successfully logged in.' });
         navigate('/admin');
       } else {
