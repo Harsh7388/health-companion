@@ -21,6 +21,12 @@ const healthTips = [
 const Dashboard: React.FC = () => {
   const { user } = useAuth();
   const { medicines, streak, getTodayLogs, getAdherenceRate, logMedicine } = useMedicine();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 800);
+    return () => clearTimeout(timer);
+  }, []);
   
   const todayLogs = getTodayLogs();
   const takenToday = todayLogs.filter(log => log.status === 'taken').length;
