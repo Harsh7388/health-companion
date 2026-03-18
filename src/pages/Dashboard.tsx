@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Pill, Flame, TrendingUp, Calendar, Clock, Droplets, Sparkles } from 'lucide-react';
 import Navbar from '@/components/layout/Navbar';
@@ -6,6 +6,7 @@ import Footer from '@/components/layout/Footer';
 import StatCard from '@/components/ui/stat-card';
 import MedicineCard from '@/components/ui/medicine-card';
 import ProgressRing from '@/components/ui/progress-ring';
+import DashboardSkeleton from '@/components/dashboard/DashboardSkeleton';
 import { useAuth } from '@/contexts/AuthContext';
 import { useMedicine } from '@/contexts/MedicineContext';
 
@@ -20,6 +21,12 @@ const healthTips = [
 const Dashboard: React.FC = () => {
   const { user } = useAuth();
   const { medicines, streak, getTodayLogs, getAdherenceRate, logMedicine } = useMedicine();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 800);
+    return () => clearTimeout(timer);
+  }, []);
   
   const todayLogs = getTodayLogs();
   const takenToday = todayLogs.filter(log => log.status === 'taken').length;
@@ -38,6 +45,9 @@ const Dashboard: React.FC = () => {
       <Navbar />
       
       <main className="pt-24 pb-12 px-4">
+        {isLoading ? (
+          <DashboardSkeleton />
+        ) : (
         <div className="container mx-auto max-w-7xl">
           {/* Header */}
           <motion.div
@@ -203,6 +213,7 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
         </div>
+        )}
       </main>
 
       <Footer />
