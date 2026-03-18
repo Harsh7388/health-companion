@@ -48,6 +48,8 @@ const Dashboard: React.FC = () => {
         {isLoading ? (
           <DashboardSkeleton />
         ) : (
+        <div className="container mx-auto max-w-7xl">
+          {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -211,6 +213,7 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
         </div>
+        )}
       </main>
 
       <Footer />
